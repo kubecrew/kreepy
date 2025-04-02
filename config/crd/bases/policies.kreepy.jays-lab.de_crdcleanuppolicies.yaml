@@ -17,7 +17,7 @@ spec:
   - name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: CRDCleanupPolicy is the Schema for the crdcleanuppolicies API
+        description: CRDCleanupPolicy is the Schema for the crdcleanuppolicies API.
         properties:
           apiVersion:
             description: |-
@@ -37,15 +37,35 @@ spec:
           metadata:
             type: object
           spec:
-            description: CRDCleanupPolicySpec defines the desired state of CRDCleanupPolicy
+            description: CRDCleanupPolicySpec defines the desired state of CRDCleanupPolicy.
             properties:
-              foo:
-                description: Foo is an example field of CRDCleanupPolicy. Edit crdcleanuppolicy_types.go
-                  to remove/update
-                type: string
+              crds:
+                description: |-
+                  CRDs is a list of names of CustomResourceDefinitions that the operator should delete.
+                  Only the name of the CRD is required.
+                items:
+                  type: string
+                type: array
             type: object
           status:
-            description: CRDCleanupPolicyStatus defines the observed state of CRDCleanupPolicy
+            description: CRDCleanupPolicyStatus defines the observed state of CRDCleanupPolicy.
+            properties:
+              processedCrds:
+                description: ProcessedCRDs is a list of names of CRDs that have already
+                  been processed by the operator.
+                items:
+                  type: string
+                type: array
+              remainingCrds:
+                description: RemainingCRDs is a list of names of CRDs that are yet
+                  to be processed.
+                items:
+                  type: string
+                type: array
+              statusMessage:
+                description: StatusMessage provides information about the current
+                  state of the cleanup process.
+                type: string
             type: object
         type: object
     served: true
