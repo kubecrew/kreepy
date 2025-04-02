@@ -20,28 +20,29 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-// EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
-// NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
-
-// CRDCleanupPolicySpec defines the desired state of CRDCleanupPolicy
+// CRDCleanupPolicySpec defines the desired state of CRDCleanupPolicy.
 type CRDCleanupPolicySpec struct {
-	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
-
-	// Foo is an example field of CRDCleanupPolicy. Edit crdcleanuppolicy_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	// CRDs is a list of names of CustomResourceDefinitions that the operator should delete.
+	// Only the name of the CRD is required.
+	CRDs []string `json:"crds,omitempty"`
 }
 
-// CRDCleanupPolicyStatus defines the observed state of CRDCleanupPolicy
+// CRDCleanupPolicyStatus defines the observed state of CRDCleanupPolicy.
 type CRDCleanupPolicyStatus struct {
-	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
+	// StatusMessage provides information about the current state of the cleanup process.
+	StatusMessage string `json:"statusMessage,omitempty"`
+
+	// ProcessedCRDs is a list of names of CRDs that have already been processed by the operator.
+	ProcessedCRDs []string `json:"processedCrds,omitempty"`
+
+	// RemainingCRDs is a list of names of CRDs that are yet to be processed.
+	RemainingCRDs []string `json:"remainingCrds,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 
-// CRDCleanupPolicy is the Schema for the crdcleanuppolicies API
+// CRDCleanupPolicy is the Schema for the crdcleanuppolicies API.
 type CRDCleanupPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -52,7 +53,7 @@ type CRDCleanupPolicy struct {
 
 // +kubebuilder:object:root=true
 
-// CRDCleanupPolicyList contains a list of CRDCleanupPolicy
+// CRDCleanupPolicyList contains a list of CRDCleanupPolicy.
 type CRDCleanupPolicyList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
