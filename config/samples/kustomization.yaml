@@ -1,0 +1,4 @@
+## Append samples of your project ##
+resources:
+- policies_v1alpha1_crdcleanuppolicy.yaml
+# +kubebuilder:scaffold:manifestskustomizesamples

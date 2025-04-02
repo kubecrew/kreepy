@@ -1,0 +1,23 @@
+# permissions for end users to view crdcleanuppolicies.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: kreepy
+    app.kubernetes.io/managed-by: kustomize
+  name: crdcleanuppolicy-viewer-role
+rules:
+- apiGroups:
+  - policies.kreepy.jays-lab.de
+  resources:
+  - crdcleanuppolicies
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - policies.kreepy.jays-lab.de
+  resources:
+  - crdcleanuppolicies/status
+  verbs:
+  - get

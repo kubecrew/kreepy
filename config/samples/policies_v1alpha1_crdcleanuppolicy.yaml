@@ -1,0 +1,9 @@
+apiVersion: policies.kreepy.jays-lab.de/v1alpha1
+kind: CRDCleanupPolicy
+metadata:
+  labels:
+    app.kubernetes.io/name: kreepy
+    app.kubernetes.io/managed-by: kustomize
+  name: crdcleanuppolicy-sample
+spec:
+  # TODO(user): Add fields here
