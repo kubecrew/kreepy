@@ -9,8 +9,11 @@ jobs:
 
     steps:
       # Checkout the repository
-      - name: Checkout code
+      - name: Setup | Checkout Repository on Release Branch
         uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
 
       - name: Action | Semantic Version Release
         id: release
