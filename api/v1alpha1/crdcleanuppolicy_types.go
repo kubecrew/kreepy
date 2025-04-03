@@ -20,11 +20,19 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
+type CRDCleanupVersion struct {
+	// Name is the name of the CustomResourceDefinition that the operator should delete.
+	Name string `json:"name"`
+
+	// Version is the apiVersion of the CustomResourceDefinition that the operator should delete.
+	Version string `json:"version,omitempty"`
+}
+
 // CRDCleanupPolicySpec defines the desired state of CRDCleanupPolicy.
 type CRDCleanupPolicySpec struct {
-	// CRDs is a list of names of CustomResourceDefinitions that the operator should delete.
+	// CRDsVersions is a list of names and apiVersions of CustomResourceDefinitions that the operator should delete.
 	// Only the name of the CRD is required.
-	CRDs []string `json:"crds,omitempty"`
+	CRDsVersions []CRDCleanupVersion `json:"crdsversions,omitempty"`
 }
 
 // CRDCleanupPolicyStatus defines the observed state of CRDCleanupPolicy.
@@ -33,10 +41,13 @@ type CRDCleanupPolicyStatus struct {
 	StatusMessage string `json:"statusMessage,omitempty"`
 
 	// ProcessedCRDs is a list of names of CRDs that have already been processed by the operator.
-	ProcessedCRDs []string `json:"processedCrds,omitempty"`
+	ProcessedCRDs []string `json:"processedCrds"`
 
 	// RemainingCRDs is a list of names of CRDs that are yet to be processed.
-	RemainingCRDs []string `json:"remainingCrds,omitempty"`
+	RemainingCRDs []string `json:"remainingCrds"`
+
+	// NonExistentCRDs is a list of names of CRDs that were not existing while processing.
+	NonExistentCRDs []string `json:"nonExistentCrds"`
 }
 
 // +kubebuilder:object:root=true
