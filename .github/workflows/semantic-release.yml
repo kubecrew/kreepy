@@ -7,6 +7,10 @@ jobs:
   release:
     runs-on: ubuntu-latest
 
+    permissions:
+      id-token: write
+      contents: write
+
     steps:
       # Checkout the repository
       - name: Setup | Checkout Repository on Release Branch
