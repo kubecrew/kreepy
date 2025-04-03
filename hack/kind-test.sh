@@ -28,5 +28,6 @@ make deploy IMG="$IMAGE_NAME"
 # Install sample crd
 echo "Installing sample CRD..."
 kubectl apply -f hack/sample-crd.yaml
+kubectl apply -f hack/sample-crd-multi-version.yaml
 
 echo "Setup complete!"

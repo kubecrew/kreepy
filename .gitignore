@@ -30,3 +30,6 @@ bundle.Dockerfile
 report.xml
 .coverage
 coverage.xml
+
+hack/kind.yaml
+hack/kind-test-debeka.sh
