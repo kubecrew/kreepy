@@ -1,0 +1,28 @@
+name: End-to-End Test
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - edited
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  e2e-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Create k8s kind cluster
+      uses: helm/kind-action@v1.3.0
+
+    - name: Run end-to-end tests
+      run: |
+        ./hack/kind-test.sh
