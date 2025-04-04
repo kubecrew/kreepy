@@ -1,0 +1,63 @@
+name: Publish OLM Release
+
+push:
+  tags:
+    - "*"
+env:
+  REGISTRY: ghcr.io
+  OPERATOR_IMAGE: ${{ env.REGISTRY}}/${{ github.repository }}-operator:${{ env.GITHUB_REF }}
+
+jobs:
+  release-olm:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Make bundle
+        run: |
+          make bundle IMG=${OPERATOR_IMAGE}
+
+      - name: Build and push operator image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: Dockerfile
+          push: true
+          tags: ${{ env.OPERATOR_IMAGE}}
+
+      - name: Build and push operator bundle image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: bundle.Dockerfile
+          push: true
+          tags: ${{ env.REGISTRY}}/${{ github.repository }}-bundle:${{ env.GITHUB_REF }}
+
+      - name: Generate operator catalog
+        uses: docker://quay.io/operator-framework/opm
+        run: |
+          mkdir -p catalog/operator
+          opm alpha render-template semver semver.yaml >catalog/operator/catalog.yaml
+          opm validate catalog/operator
+          opm generate dockerfile catalog/operator
+
+      - name: Build and push operator catalog image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: catalog/operator.Dockerfile
+          push: true
+          tags: ${{ env.REGISTRY}}/${{ github.repository }}-catalog:stable
