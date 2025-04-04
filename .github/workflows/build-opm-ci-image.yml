@@ -22,7 +22,7 @@ jobs:
 
       - name: Set image name
         run: |
-          echo "IMAGE_NAME=${REGISTRY}/opm:ci" >> $GITHUB_ENV
+          echo "IMAGE_NAME=${REGISTRY}/${{ github.repository }}/opm:ci" >> $GITHUB_ENV
 
       - name: Log in to the Container registry
         uses: docker/login-action@v3
