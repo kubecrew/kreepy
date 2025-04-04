@@ -33,7 +33,7 @@ jobs:
           --header "Authorization: Bearer ${{ secrets.SEMANTIC_RELEASE_TOKEN }}")
           echo $result
 
-          releases=$(echo $releases | jq -r '.[].tag_name')
+          releases=$(echo $result | jq -r '.[].tag_name')
 
           {
               cat <<EOF
@@ -48,6 +48,7 @@ jobs:
               done
           } >semver.yaml
 
+          cat semver.yaml
       - name: Log in to the Container registry
         uses: docker/login-action@v3
         with:
