@@ -1,8 +1,9 @@
 name: Publish OLM Release
 
-push:
-  tags:
-    - "*"
+on:
+  push:
+    tags:
+      - "*"
 env:
   REGISTRY: ghcr.io
   OPERATOR_IMAGE: ${{ env.REGISTRY}}/${{ github.repository }}-operator:${{ env.GITHUB_REF }}
