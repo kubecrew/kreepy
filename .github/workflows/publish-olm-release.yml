@@ -27,6 +27,24 @@ jobs:
           OPERATOR_BASE_IMAGE=$(echo "${REGISTRY}/${{ github.repository }}" | tr A-Z a-z)
           echo "OPERATOR_BASE_IMAGE_NAME=${OPERATOR_BASE_IMAGE}" >> $GITHUB_ENV
 
+      - name: Create semver file for OLM
+        run: |
+          releases=$(curl -s "https://api.github.com/repos/$GITHUB_REPOSITORY/releases" \
+          --header "Authorization: Bearer $GITHUB_TOKEN" | jq -r '.[].tag_name')
+
+          {
+              cat <<EOF
+          Schema: olm.semver
+          GenerateMajorChannels: true
+          GenerateMinorChannels: true
+          Stable:
+            Bundles:
+          EOF
+              for release in $releases; do
+                  echo "    - Image: ${OPERATOR_BASE_IMAGE_NAME}-bundle:$release"
+              done
+          } >semver.yaml
+
       - name: Log in to the Container registry
         uses: docker/login-action@v3
         with:
