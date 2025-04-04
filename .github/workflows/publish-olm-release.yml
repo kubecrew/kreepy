@@ -1,9 +1,8 @@
 name: Publish OLM Release
 
 on:
-  push:
-    tags:
-      - "*"
+  release:
+    types: [created] # Trigger the workflow only when a new release is created
 env:
   REGISTRY: ghcr.io
   OPERATOR_IMAGE: ${{ env.REGISTRY}}/${{ github.repository }}-operator:${{ env.GITHUB_REF }}
