@@ -58,10 +58,7 @@ jobs:
         uses: docker://ghcr.io/jaydee94/kreepy/opm:ci
         with:
           entrypoint: /bin/sh
-          args: -c "mkdir -p catalog/operator && \
-            opm alpha render-template semver semver.yaml > catalog/operator/catalog.yaml && \
-            opm validate catalog/operator && \
-            opm generate dockerfile catalog/operator"
+          args: -c "mkdir -p catalog/operator && opm alpha render-template semver semver.yaml > catalog/operator/catalog.yaml && opm validate catalog/operator && opm generate dockerfile catalog/operator"
 
       - name: Build and push operator catalog image
         uses: docker/build-push-action@v5
