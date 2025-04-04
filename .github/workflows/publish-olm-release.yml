@@ -54,16 +54,8 @@ jobs:
           push: true
           tags: ${{ env.OPERATOR_BASE_IMAGE_NAME }}-bundle:${{ env.RELEASE_VERSION }}
 
-      - name: Create opm ci image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          file: opm.Dockerfile
-          push: false
-          tags: ${{ env.OPERATOR_BASE_IMAGE_NAME }}-opm:ci
-
       - name: Generate operator catalog
-        uses: docker://ghcr.io/jaydee94/kreepy-opm:ci
+        uses: docker://ghcr.io/jaydee94/kreepy/opm:ci
         with:
           entrypoint: /bin/sh
           args: -c "mkdir -p catalog/operator && \
