@@ -63,7 +63,7 @@ jobs:
           tags: ${{ env.OPERATOR_BASE_IMAGE_NAME }}-opm:ci
 
       - name: Generate operator catalog
-        uses: docker://${{ env.OPERATOR_BASE_IMAGE_NAME }}-opm:ci
+        uses: docker://ghcr.io/jaydee94/kreepy-opm:ci
         with:
           entrypoint: /bin/sh
           args: -c "mkdir -p catalog/operator && \
