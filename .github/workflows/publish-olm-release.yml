@@ -24,7 +24,7 @@ jobs:
 
       - name: Set operator base image name env
         run: |
-          OPERATOR_BASE_IMAGE=$(${REGISTRY}/${{ github.repository }}" | tr A-Z a-z)
+          OPERATOR_BASE_IMAGE=$(echo "${REGISTRY}/${{ github.repository }}" | tr A-Z a-z)
           echo "OPERATOR_BASE_IMAGE_NAME=${OPERATOR_BASE_IMAGE}" >> $GITHUB_ENV
 
       - name: Log in to the Container registry
