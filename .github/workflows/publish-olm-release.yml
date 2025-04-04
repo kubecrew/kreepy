@@ -2,10 +2,9 @@ name: Publish OLM Release
 
 on:
   release:
-    types: [created, published, released] # Trigger the workflow only when a new release is created
+    types: [published] # Trigger the workflow only when a new release is created
 env:
   REGISTRY: ghcr.io
-  OPERATOR_IMAGE: ${{ env.REGISTRY}}/${{ github.repository }}-operator:${{ env.GITHUB_REF }}
 
 jobs:
   release-olm:
@@ -28,7 +27,7 @@ jobs:
 
       - name: Make bundle
         run: |
-          make bundle IMG=${OPERATOR_IMAGE}
+          make bundle IMG="${{ env.REGISTRY }}/${{ github.repository }}-operator:${{ env.GITHUB_REF }}"
 
       - name: Build and push operator image
         uses: docker/build-push-action@v5
@@ -36,7 +35,7 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: ${{ env.OPERATOR_IMAGE}}
+          tags: ${{ env.REGISTRY }}/${{ github.repository }}-operator:${{ env.GITHUB_REF }}
 
       - name: Build and push operator bundle image
         uses: docker/build-push-action@v5
@@ -44,7 +43,7 @@ jobs:
           context: .
           file: bundle.Dockerfile
           push: true
-          tags: ${{ env.REGISTRY}}/${{ github.repository }}-bundle:${{ env.GITHUB_REF }}
+          tags: ${{ env.REGISTRY }}/${{ github.repository }}-bundle:${{ env.GITHUB_REF }}
 
       - name: Generate operator catalog
         uses: docker://quay.io/operator-framework/opm
@@ -61,4 +60,4 @@ jobs:
           context: .
           file: catalog/operator.Dockerfile
           push: true
-          tags: ${{ env.REGISTRY}}/${{ github.repository }}-catalog:stable
+          tags: ${{ env.REGISTRY }}/${{ github.repository }}-catalog:stable
