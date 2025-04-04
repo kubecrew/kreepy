@@ -31,7 +31,6 @@ jobs:
         run: |
           result=$(curl -s "https://api.github.com/repos/$GITHUB_REPOSITORY/releases" \
           --header "Authorization: Bearer ${{ secrets.SEMANTIC_RELEASE_TOKEN }}")
-          echo $result
 
           releases=$(echo $result | jq -r '.[].tag_name')
 
@@ -85,7 +84,7 @@ jobs:
       - name: Build and push operator catalog image
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: catalog
           file: catalog/operator.Dockerfile
           push: true
           tags: ${{ env.OPERATOR_BASE_IMAGE_NAME }}-catalog:stable
