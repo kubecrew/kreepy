@@ -29,8 +29,11 @@ jobs:
 
       - name: Create semver file for OLM
         run: |
-          releases=$(curl -s "https://api.github.com/repos/$GITHUB_REPOSITORY/releases" \
-          --header "Authorization: Bearer $GITHUB_TOKEN" | jq -r '.[].tag_name')
+          result=$(curl -s "https://api.github.com/repos/$GITHUB_REPOSITORY/releases" \
+          --header "Authorization: Bearer ${{ secrets.SEMANTIC_RELEASE_TOKEN }}")
+          echo $result
+
+          releases=$(echo $releases | jq -r '.[].tag_name')
 
           {
               cat <<EOF
