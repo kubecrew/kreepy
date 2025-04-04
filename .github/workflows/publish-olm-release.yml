@@ -54,8 +54,16 @@ jobs:
           push: true
           tags: ${{ env.OPERATOR_BASE_IMAGE_NAME }}-bundle:${{ env.RELEASE_VERSION }}
 
+      - name: Create opm ci image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: opm.Dockerfile
+          push: false
+          tags: opm:ci
+
       - name: Generate operator catalog
-        uses: docker://quay.io/operator-framework/opm
+        uses: docker://opm:ci
         with:
           entrypoint: /bin/sh
           args: -c "mkdir -p catalog/operator && \
