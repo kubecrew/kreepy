@@ -57,7 +57,7 @@ jobs:
 
       - name: Make bundle
         run: |
-          make bundle IMG="${OPERATOR_BASE_IMAGE_NAME}-operator:${RELEASE_VERSION}"
+          make bundle IMG="${OPERATOR_BASE_IMAGE_NAME}-operator:${RELEASE_VERSION}" VERSION="${RELEASE_VERSION}"
 
       - name: Build and push operator image
         uses: docker/build-push-action@v5
