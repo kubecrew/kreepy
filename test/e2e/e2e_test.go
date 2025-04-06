@@ -24,7 +24,7 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
-	"github.com/jaydee94/kreepy/test/utils"
+	"github.com/kubecrew/kreepy/test/utils"
 )
 
 const namespace = "kreepy-system"

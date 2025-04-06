@@ -13,7 +13,7 @@ spec:
     - description: CRDCleanupPolicy is the Schema for the crdcleanuppolicies API.
       displayName: CRDCleanup Policy
       kind: CRDCleanupPolicy
-      name: crdcleanuppolicies.policies.kreepy.jays-lab.de
+      name: crdcleanuppolicies.policies.kreepy.kubecrew.de
       version: v1alpha1
   description: Kreepy is a Kubernetes operator that removes deprecated CRDs that can
     be specified by a policy.
@@ -41,7 +41,7 @@ spec:
     url: https://kreepy.domain
   maintainers:
   - email: janherber@gmx.de
-    name: jaydee94
+    name: kubecrew
   maturity: alpha
   provider:
     name: jays-lab

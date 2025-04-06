@@ -1,4 +1,4 @@
-module github.com/jaydee94/kreepy
+module github.com/kubecrew/kreepy
 
 go 1.22.0
 

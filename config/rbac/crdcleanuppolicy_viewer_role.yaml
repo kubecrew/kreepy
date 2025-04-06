@@ -8,7 +8,7 @@ metadata:
   name: crdcleanuppolicy-viewer-role
 rules:
 - apiGroups:
-  - policies.kreepy.jays-lab.de
+  - policies.kreepy.kubecrew.de
   resources:
   - crdcleanuppolicies
   verbs:
@@ -16,7 +16,7 @@ rules:
   - list
   - watch
 - apiGroups:
-  - policies.kreepy.jays-lab.de
+  - policies.kreepy.kubecrew.de
   resources:
   - crdcleanuppolicies/status
   verbs:

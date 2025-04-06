@@ -1,4 +1,4 @@
-apiVersion: policies.kreepy.jays-lab.de/v1alpha1
+apiVersion: policies.kreepy.kubecrew.de/v1alpha1
 kind: CRDCleanupPolicy
 metadata:
   labels:

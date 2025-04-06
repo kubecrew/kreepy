@@ -4,9 +4,9 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.16.1
-  name: crdcleanuppolicies.policies.kreepy.jays-lab.de
+  name: crdcleanuppolicies.policies.kreepy.kubecrew.de
 spec:
-  group: policies.kreepy.jays-lab.de
+  group: policies.kreepy.kubecrew.de
   names:
     kind: CRDCleanupPolicy
     listKind: CRDCleanupPolicyList

@@ -33,7 +33,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/log"
 
 	"github.com/go-logr/logr"
-	policiesv1alpha1 "github.com/jaydee94/kreepy/api/v1alpha1"
+	policiesv1alpha1 "github.com/kubecrew/kreepy/api/v1alpha1"
 )
 
 // CRDCleanupPolicyReconciler reconciles a CRDCleanupPolicy object
@@ -42,9 +42,9 @@ type CRDCleanupPolicyReconciler struct {
 	Scheme *runtime.Scheme
 }
 
-// +kubebuilder:rbac:groups=policies.kreepy.jays-lab.de,resources=crdcleanuppolicies,verbs=get;list;watch;create;update;patch;delete
-// +kubebuilder:rbac:groups=policies.kreepy.jays-lab.de,resources=crdcleanuppolicies/status,verbs=get;update;patch
-// +kubebuilder:rbac:groups=policies.kreepy.jays-lab.de,resources=crdcleanuppolicies/finalizers,verbs=update
+// +kubebuilder:rbac:groups=policies.kreepy.kubecrew.de,resources=crdcleanuppolicies,verbs=get;list;watch;create;update;patch;delete
+// +kubebuilder:rbac:groups=policies.kreepy.kubecrew.de,resources=crdcleanuppolicies/status,verbs=get;update;patch
+// +kubebuilder:rbac:groups=policies.kreepy.kubecrew.de,resources=crdcleanuppolicies/finalizers,verbs=update
 // +kubebuilder:rbac:groups=apiextensions.k8s.io,resources=customresourcedefinitions,verbs=get;list;watch;create;update;patch;delete
 // +kubebuilder:rbac:groups=apiextensions.k8s.io,resources=customresourcedefinitions/status,verbs=get;update;patch
 // +kubebuilder:rbac:groups=apiextensions.k8s.io,resources=customresourcedefinitions/finalizers,verbs=update

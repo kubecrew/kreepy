@@ -3,7 +3,7 @@
 set -e
 
 CLUSTER_NAME="kind"
-IMAGE_NAME="ghcr.io/jaydee94/kreepy:snapshot"
+IMAGE_NAME="ghcr.io/kubecrew/kreepy:snapshot"
 
 # Check if kind cluster exists
 if ! kind get clusters | grep -q "^$CLUSTER_NAME$"; then
