@@ -24,8 +24,8 @@ jobs:
 
       - name: Set operator version env without leading 'v' because operator-sdk does not support this
         run: |
-          VERSION=${RELEASE_VERSION#v}
-          echo "OPERATOR_VERSION=$VERSION" >> $GITHUB
+          OPERATOR_VERSION=${RELEASE_VERSION#v}
+          echo "OPERATOR_VERSION=$OPERATOR_VERSION" >> $GITHUB_ENV
 
       - name: Set operator base image name env
         run: |
