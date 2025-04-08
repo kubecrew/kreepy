@@ -35,6 +35,7 @@ echo "Installing sample CRD..."
 kubectl apply -f hack/sample-crd.yaml
 kubectl apply -f hack/sample-crd-multi-version.yaml
 kubectl apply -f hack/sample.yaml
+kubectl apply -f hack/multisample.yaml
 echo ""
 
 # Deploy the CRD Cleanup Policy
@@ -90,7 +91,6 @@ else
     echo "❌ Remaining CRDs detected: $REMAINING_CRDS. Test FAILED."
     exit 1
 fi
-
 
 echo "E2E test completed successfully."
 kind delete cluster

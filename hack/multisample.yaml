@@ -1,0 +1,6 @@
+apiVersion: example.com/v3
+kind: MultiSample
+metadata:
+  name: example-multi-sample
+spec:
+  fieldA: "Hello, Kubernetes!"
