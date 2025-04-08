@@ -226,7 +226,9 @@ func (r *CRDCleanupPolicyReconciler) checkCRDInstances(ctx context.Context, crd 
 		log.Error(err, "Failed to list instances of CRD", "CRD", crd.GetName())
 		return -1, err
 	}
-	return len(instances.Items), nil
+	return len(slices.DeleteFunc(instances.Items, func(item unstructured.Unstructured) bool {
+		return item.GetAPIVersion() != crdVersion && crdVersion != ""
+	})), nil
 }
 
 // deleteCRDorVersion deletes the given CRD or a specific apiVersion of the CRD from the cluster
